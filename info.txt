@@ -1,0 +1,3 @@
+username = omarbakr181993
+password = DsEjRFJFKs1hA9Yj
+URL = mongodb+srv://omarbakr181993:DsEjRFJFKs1hA9Yj@cluster0.ndzrc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
