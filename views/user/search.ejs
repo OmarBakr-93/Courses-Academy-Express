@@ -36,7 +36,10 @@
 
       <section class="w-100">
         <%- include('../components/navbar') %>
-
+        <% if (data.length === 0) { %>
+          <h1 style="text-align: center; margin-top: 4rem;">No data available for this search</h1>
+          <% } %> 
+          <% if (data.length > 0) { %>
         <table
           style="width: 99%"
           class="text-center mx-auto table mt-5 table-striped table-bordered"
@@ -52,11 +55,12 @@
             </tr>
           </thead>
           <tbody>
+            <% data.forEach((element, index) => { %>
             <tr>
-              <th scope="row">1</th>
-              <td>test1</td>
-              <td>test2</td>
-              <td>@test3</td>
+              <th scope="row"><%= index + 1  %></th>
+              <td><%= element.firstName %> <%= element.lastName%></td>
+              <td><%= element.gender %></td>
+              <td><%= element.country %></td>
 
               <td>
                 <a
@@ -64,7 +68,7 @@
                   data-bs-title="View details"
                   data-bs-placement="top"
                   class="btn btn-primary btn-sm"
-                  href="./user/view.html"
+                  href="/view/<%= element._id %>"
                   ><i class="bi bi-eye"></i
                 ></a>
 
@@ -73,22 +77,30 @@
                   data-bs-title="Edit user"
                   data-bs-placement="top"
                   class="btn btn-primary btn-sm"
-                  href="./user/edit.html"
+                  href="./edit/<%= element._id %>"
                 >
                   <i class="bi bi-pencil"></i>
                 </a>
-                <button
-                  data-bs-toggle="tooltip"
-                  data-bs-title="Delete user"
-                  data-bs-placement="top"
-                  class="btn btn-danger btn-sm"
-                >
-                  <i class="bi bi-trash"></i>
-                </button>
+                <form
+                  style="display: inline;"
+                    action="/edit/<%= element._id %>?_method=DELETE"
+                    method="post"
+                  >
+                    <button
+                      data-bs-toggle="tooltip"
+                      data-bs-title="Delete user"
+                      data-bs-placement="top"
+                      class="btn btn-danger btn-sm"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </form>
               </td>
             </tr>
+            <% }) %>
           </tbody>
         </table>
+        <% } %>
       </section>
     </main>
     <script src="../js/bootstrap.bundle.min.js"></script>
